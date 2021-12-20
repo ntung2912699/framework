@@ -7,7 +7,7 @@ use libs\DBConnect;
 use PDO;
 use PDOException;
 require '../libs/DBConnect.php';
-require '../app/Observers/QueryObservers.php';
+require '../App/Observers/QueryObservers.php';
 
 class BaseModels extends DBConnect{
     use QueryObservers;
@@ -38,7 +38,6 @@ class BaseModels extends DBConnect{
 
             $sql = $this->db->query("select * from $this->tableName");
             $results = $sql->fetchAll(PDO::FETCH_ASSOC);
-            print_r($results);
             return $results;
 
         }catch (PDOException $e){
@@ -46,13 +45,15 @@ class BaseModels extends DBConnect{
         }
     }
 
-//    public function find($id){
-//        $this->db->query("select * from $this->tableName where id = $id");
-//    }
-//
-//    public function delete($id){
-//        $this->db->query("delete from $this->tableName where id = $id");
-//    }
+    public function find($id){
+        $sql = $this->db->query("select * from $this->tableName where id = $id");
+        $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
+    public function delete($id){
+        $this->db->query("delete from $this->tableName where id = $id");
+    }
 
     public function insert($data){
        if ($data != null){
