@@ -10,8 +10,33 @@
     <title>Hello, world!</title>
 </head>
 <body>
-<h1>Trang Home</h1>
-<?php echo "ok" ?>
+<div class="container">
+    <div class="col-md-12 text-center">
+        <h1>List User</h1>
+    </div>
+    <div class="col-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Roles</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($users as $user){ ?>
+                <tr>
+                    <th scope="row"><?php echo $user['id']?></th>
+                    <td><?php echo $user['name']?></td>
+                    <td><?php echo $user['email']?></td>
+                    <td><?php echo $user['roles']?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

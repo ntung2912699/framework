@@ -4,9 +4,9 @@ namespace libs;
 class BaseController{
 
     public static function view($view,$args = []){
-        extract($args,EXTR_SKIP);
+        extract($args);
         $template = "../resource/View/$view";
-        if (is_readable($template)){
+        if (file_exists($template)){
             require $template;
         }else{
             echo "$template not found";

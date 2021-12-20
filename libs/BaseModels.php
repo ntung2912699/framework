@@ -7,7 +7,7 @@ use libs\DBConnect;
 use PDO;
 use PDOException;
 require '../libs/DBConnect.php';
-require '../App/Observers/QueryObservers.php';
+require '../app/Observers/QueryObservers.php';
 
 class BaseModels extends DBConnect{
     use QueryObservers;
@@ -28,12 +28,7 @@ class BaseModels extends DBConnect{
         $this->afterSelect();
     }
 
-//    public function query($sql){
-//        $user = $this->db->query($sql);
-//        echo $user;
-//    }
-
-    public function getdata(){
+    public function getAll(){
         try {
 
             $sql = $this->db->query("select * from $this->tableName");
@@ -41,32 +36,66 @@ class BaseModels extends DBConnect{
             return $results;
 
         }catch (PDOException $e){
-            return 0;
+            return $e->getMessage();
         }
     }
 
     public function find($id){
-        $sql = $this->db->query("select * from $this->tableName where id = $id");
-        $results = $sql->fetchAll(PDO::FETCH_ASSOC);
-        return $results;
+        try {
+            $sql = $this->db->query("select * from $this->tableName where id = $id");
+            $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
     }
 
     public function delete($id){
-        $this->db->query("delete from $this->tableName where id = $id");
+        try {
+
+           return $this->db->query("delete from $this->tableName where id = $id");
+
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
     }
 
     public function insert($data){
        if ($data != null){
-           foreach ($data as $key=>$value){
-              $column [] = $key;
-              $valuedata[] = $value;
+           try {
+               foreach ($data as $key=>$value){
+                   $column [] = $key;
+                   $valuedata[] = $value;
+               }
+               $columndata = implode(",",$column);
+               $valuecolumn = implode("','",$valuedata);
+               $valuecolumn = "'$valuecolumn'";
+               $sql = "INSERT INTO $this->tableName ($columndata) VALUE ($valuecolumn)";
+               $this->db->query($sql);
+           }catch (\Exception $e){
+               return $e->getMessage();
            }
-           $columndata = implode(",",$column);
-           $valuecolumn = implode("','",$valuedata);
-           print_r($columndata . $valuecolumn);
-           $this->db->query("INSERT INTO table_name ($columndata) VALUE ($valuecolumn)");
        }else{
            echo "data insert null";
        }
+    }
+
+    public function update($data, $id){
+        try {
+            $sql = "UPDATE $this->tableName SET ";
+            if ($data != null){
+                foreach ($data as $key=>$value){
+                    $sql .= "$key = '$value', ";
+                }
+                $sql = trim($sql, ", ");
+                $sql .= " WHERE id = $id";
+                $this->db->query($sql);
+            }else{
+                echo "data insert null";
+            }
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
     }
 }
