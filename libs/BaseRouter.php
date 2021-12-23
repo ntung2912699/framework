@@ -37,11 +37,9 @@ class BaseRouter
         $method = strtolower($_SERVER['REQUEST_METHOD']);
         $path = $url['path'];
         $patternScore = [];
-        $url = trim($path,'/');
         foreach ($this->routeTable[$method] as $pattern => $controller) {
-            if ($pattern === $path) {
+            if ($pattern == $path) {
                 $this->currentRoute = $this->routeTable[$method][$pattern];
-                var_dump($this->currentRoute);
                 break;
             }
             $patternScore[] = $this->patternScore($path, $pattern);
@@ -52,7 +50,7 @@ class BaseRouter
             }
             return $a['score'] < $b['score'];
         });
-        $this->currentRoute = $this->routeTable[$method][$patternScore[0]['pattern']];
+        $this->currentRoute = $this->routeTable[$method][$pattern];
         $this->currentRoute['params'] = $patternScore[0]['params'];
     }
 
@@ -60,11 +58,9 @@ class BaseRouter
     {
         $path = explode('/', $path);
         $pattern = explode('/', $patternStr);
-
         if (count($path) != count($pattern)) {
             return ['score' => 0, 'params' => [], 'pattern' => $patternStr];
         }
-
         $score = 0;
         $param = [];
         foreach ($pattern as $i => $section) {

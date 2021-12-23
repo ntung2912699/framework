@@ -20,25 +20,31 @@ class UserController extends BaseController{
         return self::view('index.php',['users'=>$users]);
     }
 
+    public function viewcreate(){
+        return self::view('users/formcreate.php');
+    }
+
     public function find($id = 1){
         $users = $this->userRepo->find($id);
         return self::view('index.php',['users'=>$users]);
     }
     public function create(){
-        $data =
-        [
-            'name' => 'abc',
-            'email' => 'abc@gmail.com',
-            'password' => 'abc12345',
-            'roles' => 1
+        $data = [
+            'name' => $_REQUEST['name'],
+            'email' => $_REQUEST['email'],
+            'password' => $_REQUEST['password'],
+            'roles' => $_REQUEST['roles']
         ];
-        $obj = $this->userRepo->insertdata($data);
-        return $obj;
+        echo "<pre>";
+        var_dump($data);
+        echo "</pre>";
+        $users = $this->userRepo->insertdata($data);
+        return self::view('index.php',['users'=>$users]);;
     }
     public function update(){
         $id = 3;
         $data = [
-            'name' => 'bbb',
+            'name' => 'aaa',
             'email' => 'bbb@gmail.com',
             'password' => 'tkl12345',
             'roles' => 0
