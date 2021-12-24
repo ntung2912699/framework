@@ -2,7 +2,6 @@
 namespace app\Controller;
 use app\Repositories\UserRepository;
 use libs\BaseController;
-use libs\BaseView;
 require '../app/Repositories/UserRepository.php';
 require '../libs/BaseController.php';
 
@@ -17,39 +16,48 @@ class UserController extends BaseController{
 
     public function index(){
         $users = $this->userRepo->getAll();
-        return self::view('index.php',['users'=>$users]);
+        return $this->view('/users/index',['users'=>$users]);
+    }
+
+    public function find($id){
+        $users = $this->userRepo->find($id);
+        return self::view('users/index',['users'=>$users]);
+    }
+
+    public function delete($id){
+        $users = $this->userRepo->delete($id);
+        echo "xoa xong $id <a href='/users/index'>Ve Trang Chu</a>";
     }
 
     public function viewcreate(){
-        return self::view('users/formcreate.php');
+        return self::view("users/formcreate");
     }
 
-    public function find($id = 1){
-        $users = $this->userRepo->find($id);
-        return self::view('index.php',['users'=>$users]);
-    }
-    public function create(){
+    public function create()
+    {
         $data = [
             'name' => $_REQUEST['name'],
             'email' => $_REQUEST['email'],
             'password' => $_REQUEST['password'],
             'roles' => $_REQUEST['roles']
         ];
-        echo "<pre>";
-        var_dump($data);
-        echo "</pre>";
         $users = $this->userRepo->insertdata($data);
-        return self::view('index.php',['users'=>$users]);;
+        return readlink('/users/index');
     }
-    public function update(){
-        $id = 3;
+
+    public function edit($id){
+        $users = $this->userRepo->find($id);
+        return self::view("users/editform",['users'=>$users]);
+    }
+    public function update($id){
         $data = [
-            'name' => 'aaa',
-            'email' => 'bbb@gmail.com',
-            'password' => 'tkl12345',
-            'roles' => 0
+            'name' => $_REQUEST['name'],
+            'email' => $_REQUEST['email'],
+            'password' => $_REQUEST['password'],
+            'roles' => $_REQUEST['roles']
         ];
-        $users = $this->userRepo->updatedata($data, $id);
-        return $users;
+        $this->userRepo->updatedata($data, $id);
+
+        return realpath('/users/index');
     }
 }

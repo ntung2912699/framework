@@ -1,24 +1,33 @@
 <?php
 use app\Controller\UserController;
 use FastRoute\Route;
+use libs\RequestCore;
+use libs\BaseRouter;
 
 require '../vendor/autoload.php';
 require '../libs/BaseRouter.php';
 require '../app/Controller/UserController.php';
+require '../libs/RequestCore.php';
 
-$router = new libs\BaseRouter();
+BaseRouter::get('/users/index', 'UserController@index');
 
-$router->register('get','/users/index',[\app\controller\UserController::class,'index']);
+BaseRouter::get('/users/create', 'UserController@viewcreate');
+BaseRouter::post('/users/up_created', 'UserController@create');
 
-$router->register('get','/users/home',[\app\controller\UserController::class,'index']);
-$router->register('get','/users/detail/1',[\app\controller\UserController::class,'find']);
-$router->register('get','/users/update/1',[\app\controller\UserController::class,'update']);
-$router->register('get','/users/create',[\app\controller\UserController::class,'viewcreate']);
-$router->register('get','/users/store',[\app\controller\UserController::class,'create']);
+BaseRouter::get('/users/edit/{id}', 'UserController@edit');
+BaseRouter::post('/users/update/{id}', 'UserController@update');
 
-$route = $router->getRouter();
+BaseRouter::get('/users/find/{id}', 'UserController@find');
 
-$controller = new $route['controller'];
-$action = $route['action'];
+BaseRouter::get('/users/delete/{id}', 'UserController@delete');
 
-call_user_func_array([$controller,$action],$route['params']);
+$router = new BaseRouter();
+
+try {
+    $route = $router->getRoute();
+} catch (\Exception $e) {
+    echo $e->getMessage();
+    exit();
+}
+
+$route = $router->matchController();

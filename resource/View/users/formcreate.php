@@ -15,19 +15,19 @@
         <h1>Create Users</h1>
     </div>
     <div class="col-12">
-        <form method="post" action="/users/store">
+        <form method="POST" action="/users/up_created">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Name</label>
                     <input type="text" name="name" class="form-control" id="name" placeholder="Name">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="email">Password</label>
+                    <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" id="email" placeholder="Email">
                 </div>
             </div>
             <div class="form-group">
-                <label for="password">Address</label>
+                <label for="password">Password</label>
                 <input type="password" name="password" class="form-control" id="password" placeholder="Password">
             </div>
             <div class="form-group">

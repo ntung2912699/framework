@@ -36,7 +36,7 @@ class UserRepository{
     }
 
     public function updatedata($data, $id){
-        return $this->model->insert($data, $id);
+        return $this->model->update($data, $id);
     }
 
 }

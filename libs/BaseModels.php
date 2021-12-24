@@ -53,7 +53,6 @@ class BaseModels extends DBConnect{
 
     public function delete($id){
         try {
-
            return $this->db->query("delete from $this->tableName where id = $id");
 
         }catch (PDOException $e){
@@ -73,6 +72,7 @@ class BaseModels extends DBConnect{
                $valuecolumn = "'$valuecolumn'";
                $sql = "INSERT INTO $this->tableName ($columndata) VALUE ($valuecolumn)";
                $this->db->query($sql);
+               echo "insert successfuly";
            }catch (\Exception $e){
                return $e->getMessage();
            }
@@ -91,8 +91,9 @@ class BaseModels extends DBConnect{
                 $sql = trim($sql, ", ");
                 $sql .= " WHERE id = $id";
                 $this->db->query($sql);
+                echo "update successfuly";
             }else{
-                echo "data insert null";
+                echo "data update null";
             }
         }catch (\Exception $e){
             return $e->getMessage();

@@ -1,15 +1,18 @@
 <?php
 namespace libs;
+use resource\Template;
+require '../resource/View/templateengine/tempengine.php';
+class BaseController extends Template{
 
-class BaseController{
+    const VIEW_FOLDER = __DIR__ . '/../resource/View';
 
-    public static function view($view,$args = []){
-        extract($args);
-        $template = "../resource/View/$view";
-        if (file_exists($template)){
-            require $template;
-        }else{
-            echo "$template not found";
+    protected function view($viewPath, $data = [])
+    {
+        foreach ($data as $key => $value) {
+            //$$ = Khai báo biến + key
+            $$key = $value;
         }
+
+        return require_once (self::VIEW_FOLDER . '/' . str_replace(".",'/',$viewPath) . '.php');
     }
 }
