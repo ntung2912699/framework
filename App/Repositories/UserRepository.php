@@ -39,4 +39,8 @@ class UserRepository{
         return $this->model->update($data, $id);
     }
 
+    public function login(){
+        return $this->model->login();
+    }
+
 }
