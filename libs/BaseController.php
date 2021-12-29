@@ -1,8 +1,7 @@
 <?php
 namespace libs;
-use resource\Template;
-require '../resource/View/templateengine/tempengine.php';
-class BaseController extends Template{
+
+class BaseController{
 
     const VIEW_FOLDER = __DIR__ . '/../resource/View';
 

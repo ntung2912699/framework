@@ -1,19 +1,22 @@
 <?php
 namespace app\Middleware;
+use app\middleware\InterfaceMiddleware;
+require '../app/Middleware/InterfaceMiddleware.php';
 
 class LogMiddleware implements InterfaceMiddleware {
     public $next = true;
 
-    public function checkAdmin()
+    public function checkLogin()
     {
-        // TODO: Implement checkAdmin() method.
-    }
-
-    public function action($router, $method, $params){
-        if ($params['id'] == 3){
+        if (!isset($_SESSION['name'])){
             $this->next = false;
             return;
         }
         $this->next = true;
+    }
+
+    public function checkAdmin()
+    {
+        // TODO: Implement checkAdmin() method.
     }
 }

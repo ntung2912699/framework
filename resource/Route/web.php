@@ -3,14 +3,17 @@ use app\Controller\UserController;
 use FastRoute\Route;
 use libs\RequestCore;
 use libs\BaseRouter;
+use app\Middleware\LogMiddleware;
 
 require '../vendor/autoload.php';
 require '../libs/BaseRouter.php';
 require '../app/Controller/UserController.php';
 require '../libs/RequestCore.php';
 require '../resource/Route/webApi.php';
+require '../app/Middleware/LogMiddleware.php';
 require '../app/Controller/Api/ApiUserController.php';
 require '../app/Controller/Auth/AuthController.php';
+
 
 /*
  * router user
@@ -35,6 +38,8 @@ BaseRouter::post('/api/users/create', 'UserController@api_create');
  * auth router
  */
 BaseRouter::get('/login', 'AuthController@loginform');
+BaseRouter::post('/checklogin', 'AuthController@checklogin');
+BaseRouter::get('/logout', 'AuthController@logout');
 
 $router = new BaseRouter();
 

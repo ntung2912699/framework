@@ -6,7 +6,7 @@ use PDO;
 class DBConnect
 {
 
-    protected static function getConnect()
+    public static function getConnect()
     {
         static $db = null;
 

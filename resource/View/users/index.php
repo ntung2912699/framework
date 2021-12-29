@@ -11,8 +11,19 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-md-12 text-center">
-        <h1>List User</h1>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h1>List User</h1>
+        </div>
+        <div class="col-md-6 text-right">
+            <h5>
+            <?php if(isset($_SESSION['name'])){ ?>
+                <?php echo $_SESSION['name']."<a href='/login'>logout</a>";?>
+            <?php }else{ ?>
+                <?php echo "chua dang nhap <a href='/login'>login</a>";?>
+            <?php } ?>
+            </h5>
+        </div>
     </div>
     <div class="col-12">
         <table class="table">

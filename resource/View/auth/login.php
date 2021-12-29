@@ -14,17 +14,19 @@
     <div class="col-md-12 text-center">
         <h1>Login Users</h1>
     </div>
-    <div class="col-12">
-        <form method="POST" action="/authlogin">
+    <div class="col-md-6 offset-md-3">
+        <form method="post" action="/checklogin">
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" id="email" placeholder="Email">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
