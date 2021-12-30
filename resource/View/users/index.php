@@ -17,8 +17,8 @@
         </div>
         <div class="col-md-6 text-right">
             <h5>
-            <?php if(isset($_SESSION['name'])){ ?>
-                <?php echo $_SESSION['name']."<a href='/login'>logout</a>";?>
+            <?php if(isset($_SESSION['id'])){ ?>
+                <?php echo $_SESSION['email']." - ". $_SESSION['name']."<a href='/logout'>logout</a>";?>
             <?php }else{ ?>
                 <?php echo "chua dang nhap <a href='/login'>login</a>";?>
             <?php } ?>
@@ -48,7 +48,7 @@
                     <td><?php echo $user['email']?></td>
                     <td><?php echo $user['roles']?></td>
                     <td>
-                        <a href="/users/find/<?php echo $user['id']?>">
+                        <a href="/users/detail/<?php echo $user['id']?>">
                             <button type="button" class="btn btn-primary">Detail</button>
                         </a>
                         <a href="/users/edit/<?php echo $user['id'] ?>">

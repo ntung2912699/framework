@@ -13,8 +13,7 @@ class AuthController extends BaseController
 
     public function checklogin(){
         if (isset($_SESSION['name'])){
-            var_dump($_SESSION['name']);
-            echo "đã đăng nhập". $_SESSION['name'];
+            echo $_SESSION['name']." đã đăng nhập vui lòng đăng xuất";
         }else{
             $db = DBConnect::getConnect();
             $email = $_REQUEST['email'];
@@ -25,8 +24,11 @@ class AuthController extends BaseController
             if ($user != null){
                 foreach ($user as $u){
                     if ($u["email"] == $email && $u['password'] == $password ){
+                        $_SESSION['id'] = $u['id'];
                         $_SESSION['name'] = $u['name'];
-                        echo "welcome ". $_SESSION['name'];
+                        $_SESSION['email'] = $u['email'];
+                        $_SESSION['password'] = $u['password'];
+                        $_SESSION['roles'] = $u['roles'];
                         header('location:users/index');
                     }
                 }
@@ -36,8 +38,8 @@ class AuthController extends BaseController
         }
     }
     public function logout(){
-        if (isset($_SESSION['name'])){
-            unset($_SESSION['name']);
+        if (isset($_SESSION['id'])){
+            unset($_SESSION['id'],$_SESSION['name'],$_SESSION['email'],$_SESSION['password'],$_SESSION['roles']);
             header('location:login');
         }else{
             echo "chua dang nhap <a href='/login'>login</a>";

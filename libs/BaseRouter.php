@@ -6,27 +6,26 @@ class BaseRouter
     /**
      * @param $pattern
      * @param string $dest
-     * Note:
      *
      */
     private static $routeTable = [];
     public $currentRoute = 'null';
 
-    public static function get($path, $action, $classMiddle = [])
+    public static function get($path, $action, $classMiddleware = [])
     {
         $method = RouterMethod::GET;
         $pattern = $path;
         $dest = explode("@", $action);
-        $middleware = $classMiddle;
+        $middleware = $classMiddleware;
         self::setRouteTable($method, $pattern, $dest, $middleware);
     }
 
-    public static function post($path, $action,  $classMiddle = [])
+    public static function post($path, $action,  $classMiddleware = [])
     {
         $method = RouterMethod::POST;
         $pattern = $path;
         $dest = explode("@", $action);
-        $middleware = $classMiddle;
+        $middleware = $classMiddleware;
         self::setRouteTable($method, $pattern, $dest, $middleware);
     }
 
@@ -70,11 +69,11 @@ class BaseRouter
         $this->currentRoute['param'] = $patternScore[0]['param'];
         if (count($this->currentRoute['middleware'])) {
             foreach ($this->currentRoute['middleware'] as $middleware) {
-                $objMiddle = new $middleware;
-                $objMiddle->action($this->currentRoute, $method, $this->currentRoute['param']);
-                if ($objMiddle->next == false) {
-                    $message = "Request không hợp lệ";
-                    throw new MiddlewareException($message);
+                $LogMiddleware = new $middleware;
+                $LogMiddleware->checklogin();
+                if ($LogMiddleware->next == false) {
+                    echo "Middleware not passed because you do not have authentication information on the system - <a href='/login'>login now</a> ";
+                    exit();
                 }
             }
         }
@@ -96,9 +95,9 @@ class BaseRouter
             if ($path[$key] == $value) {
                 $score += 1;
             } else {
-                $convertP = $this->convertParam($value);
-                if ($convertP) {
-                    $param[$convertP] = $path[$key];
+                $convertParams = $this->convertParam($value);
+                if ($convertParams) {
+                    $param[$convertParams] = $path[$key];
                 }
             }
         }
