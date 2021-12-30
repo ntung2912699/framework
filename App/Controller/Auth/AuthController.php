@@ -29,7 +29,13 @@ class AuthController extends BaseController
                         $_SESSION['email'] = $u['email'];
                         $_SESSION['password'] = $u['password'];
                         $_SESSION['roles'] = $u['roles'];
-                        header('location:users/index');
+                        if (isset($_REQUEST['checksave'])){
+                               $emailsave = $u['email'];
+                               $passwordsave = $u['password'];
+                               setcookie( "email", $emailsave, time() +3600 , "/" );
+                               setcookie( "password", $passwordsave, time() +3600 , "/" );
+                        }
+                       header('location:users/index');
                     }
                 }
             }else{

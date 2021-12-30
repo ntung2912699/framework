@@ -19,14 +19,18 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+                    <input type="email" name="email" class="form-control" value="<?php echo $_COOKIE['email'] ?>" id="email" placeholder="Email">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                    <input type="password" name="password" class="form-control" value="<?php echo $_COOKIE['password'] ?>" id="password" placeholder="Password">
                 </div>
+            </div>
+            <div class="form-row form-check">
+                <input type="checkbox" name="checksave" class="form-check-input" id="checksave">
+                <label class="form-check-label" for="checksave">Save infomation</label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
