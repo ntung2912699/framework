@@ -11,8 +11,6 @@ class UserRepository{
     public function __construct()
     {
         $this->model = new User();
-//        $this->table = $this->model->fillable_name;
-//        $this->fillable = $this->model->fillable_name;
     }
 
     public function sqlquery($sql){
