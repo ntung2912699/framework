@@ -19,13 +19,21 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="email">Email</label>
+                    <?php if (isset($_COOKIE)){?>
                     <input type="email" name="email" class="form-control" value="<?php echo $_COOKIE['email'] ?>" id="email" placeholder="Email">
+                    <?php }else{ ?>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+                    <?php } ?>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" value="<?php echo $_COOKIE['password'] ?>" id="password" placeholder="Password">
+                    <?php if (isset($_COOKIE)){?>
+                        <input type="password" name="password" class="form-control" value="<?php echo $_COOKIE['password'] ?>" id="password" placeholder="Password">
+                    <?php }else{ ?>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                    <?php } ?>
                 </div>
             </div>
             <div class="form-row form-check">
