@@ -5,8 +5,6 @@ require '../app/Models/User.php';
 
 class UserRepository{
     protected $model;
-    protected $table;
-    protected $fillable;
 
     public function __construct()
     {
@@ -35,10 +33,6 @@ class UserRepository{
 
     public function updatedata($data, $id){
         return $this->model->update($data, $id);
-    }
-
-    public function login(){
-        return $this->model->login();
     }
 
 }

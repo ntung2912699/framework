@@ -26,7 +26,7 @@ class UserController extends BaseController {
 
     public function delete($id){
         $users = $this->userRepo->delete($id);
-        echo "xoa xong $id <a href='/users/index'>Ve Trang Chu</a>";
+        echo "Delete Complete user-id: $id <a href='/users/index'>Back Index</a>";
     }
 
     public function viewcreate(){
@@ -42,7 +42,7 @@ class UserController extends BaseController {
             'roles' => $_REQUEST['roles']
         ];
         $this->userRepo->insertdata($data);
-        echo "Them user thanh cong <a href='/users/index'>Ve Trang Chu</a>";
+        header('location:index');
     }
 
     public function edit($id){
@@ -57,7 +57,7 @@ class UserController extends BaseController {
             'roles' => $_REQUEST['roles']
         ];
         $this->userRepo->updatedata($data, $id);
-        echo "Them user $id thanh cong <a href='/users/index'>Ve Trang Chu</a>";
+        echo "update users $id successfuly <a href='/users/index'>back index</a>";
     }
 
     /*

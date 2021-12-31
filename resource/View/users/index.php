@@ -20,7 +20,7 @@
             <?php if(isset($_SESSION['id'])){ ?>
                 <?php echo $_SESSION['email']." - ". $_SESSION['name']."<a href='/logout'>logout</a>";?>
             <?php }else{ ?>
-                <?php echo "chua dang nhap <a href='/login'>login</a>";?>
+                <?php echo "<a href='/login'>login</a>";?>
             <?php } ?>
             </h5>
         </div>
@@ -54,7 +54,7 @@
                         <a href="/users/edit/<?php echo $user['id'] ?>">
                             <button type="button" class="btn btn-waring">Edit</button>
                         </a>
-                        <a href="/users/delete/<?php echo $user['id'] ?>">
+                        <a href="/users/delete/<?php echo $user['id'] ?>" onclick="confirm('delete user')">
                             <button type="button" class="btn btn-danger">Delete</button>
                         </a>
                     </td>

@@ -121,7 +121,7 @@ class BaseRouter
         return $this->currentRoute;
     }
 
-    public function matchController()
+    public function match()
     {
         $current = $this->getRoute();
         $convertController = "app\\Controller\\".$current['controller']."";

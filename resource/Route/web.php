@@ -21,7 +21,7 @@ BaseRouter::get('/users/index', 'UserController@index');
 BaseRouter::get('/users/create', 'UserController@viewcreate',[LogMiddleware::class]);
 BaseRouter::post('/users/up_created', 'UserController@create',[LogMiddleware::class]);
 BaseRouter::get('/users/edit/{id}', 'UserController@edit',[LogMiddleware::class]);
-BaseRouter::post('/users/update/{id}', 'UserController@update',[LogMiddleware::class]);
+BaseRouter::post('/users/edit/{id}', 'UserController@update',[LogMiddleware::class]);
 BaseRouter::get('/users/detail/{id}', 'UserController@find');
 BaseRouter::get('/users/delete/{id}', 'UserController@delete',[LogMiddleware::class]);
 
@@ -49,4 +49,4 @@ try {
     exit();
 }
 
-$route = $router->matchController();
+$route = $router->match();

@@ -12,11 +12,11 @@
 <body>
 <div class="container">
     <div class="col-md-12 text-center">
-        <h1>Create Users</h1>
+        <h1>Update Users</h1>
     </div>
     <div class="col-12">
         <?php foreach ($users as $user) { ?>
-            <form method="post" action="users/update/<?php echo $user['id']?>">
+            <form method="post" action="">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>

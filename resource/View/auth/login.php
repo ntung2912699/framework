@@ -19,7 +19,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="email">Email</label>
-                    <?php if (isset($_COOKIE)){?>
+                    <?php if ($_COOKIE != null){?>
                     <input type="email" name="email" class="form-control" value="<?php echo $_COOKIE['email'] ?>" id="email" placeholder="Email">
                     <?php }else{ ?>
                         <input type="email" name="email" class="form-control" id="email" placeholder="Email">
@@ -29,7 +29,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="password">Password</label>
-                    <?php if (isset($_COOKIE)){?>
+                    <?php if ($_COOKIE != null){?>
                         <input type="password" name="password" class="form-control" value="<?php echo $_COOKIE['password'] ?>" id="password" placeholder="Password">
                     <?php }else{ ?>
                         <input type="password" name="password" class="form-control" id="password" placeholder="Password">
@@ -37,7 +37,11 @@
                 </div>
             </div>
             <div class="form-row form-check">
-                <input type="checkbox" name="checksave" class="form-check-input" id="checksave">
+                <?php if ($_COOKIE != null) {?>
+                    <input type="checkbox" name="checksave" checked class="form-check-input" id="checksave">
+                <?php }else{ ?>
+                    <input type="checkbox" name="checksave" class="form-check-input" id="checksave">
+                <?php } ?>
                 <label class="form-check-label" for="checksave">Save infomation</label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
